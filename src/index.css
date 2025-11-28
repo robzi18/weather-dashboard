@@ -1,0 +1,24 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--body-bg-color);
+  color: var(--primary-text-color);
+
+}
+:root{
+  --body-bg-color: #0E1421;
+  --primary-bg-color: #060C1A;
+  --primary-text-color: #FFFFFF;
+  --secondary-text-color: #676B73;
+  /* I need gradient of the following */
+  --light-card-bg-color: #14203A; 
+  --light-card2-bg-color: #15223E;
+  --light-card3-bg-color: #121D33;
+  --accent-bg-color: #742BEC;
+  --focus-color:#2E03E4;
+
+}
