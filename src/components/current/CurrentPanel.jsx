@@ -3,7 +3,17 @@ import './currentPanel.css'
 import { IoLocationOutline } from "react-icons/io5";
 
 const CurrentPanel = () => {
-  const [active,setActive] = useState("false")
+  const [isCel,setIsCel] = useState(false)
+  const [isFar,setIsFar] = useState(false)
+  const [isActive,setIsActive] = useState(false)
+  function handleCel(){
+    setIsFar(false)
+    setIsCel(!isCel)
+  }
+  function handleFar(){
+    setIsCel(false)
+    setIsFar(!isFar)
+  }
   return (
     <section className='current-panel-container'>
       <div>
@@ -13,8 +23,8 @@ const CurrentPanel = () => {
           <span>Ethiopia</span>
          </div>
         <div className='scale-wrapper'>
-          <span className="scale"> C </span>
-          <span className="scale active"> F </span>
+          <span className={` scale ${isCel ? "active" : ""}`} onClick={handleCel}> C </span>
+          <span className={` scale ${isFar ? "active" : ""}`} onClick={handleFar}> F </span>
         </div>
       </div>
       </div>
@@ -40,7 +50,6 @@ const CurrentPanel = () => {
             <p>Feels Like 28</p>
           </div>
          </div>
-
       </div>
       <div className="alert-wrapper">
         <p></p> 

@@ -10,15 +10,27 @@ const Highlights = () => {
       <div className="card-wrapper">
           <div className="highlight-card">
             <p>Chance of Rain</p>
+            <div className="gif-wrapper">
+              <img src="./images/rain.gif" alt="" />
+            </div>
           </div>
           <div className="highlight-card">
             <p>UV Index</p>
+            <div className="gif-wrapper">
+              <img src="./images/UV.gif" alt="" />
+            </div>
           </div>
           <div className="highlight-card">
             <p>Wind Status</p>
+            <div className="gif-wrapper">
+              <img src="./images/wind.gif" alt="" />
+            </div>
           </div>
           <div className="highlight-card">
             <p>Humidity</p>
+            <div className="gif-wrapper">
+              <img src="./images/humid.gif" alt="" />
+            </div>
           </div>
       </div>
     </section>

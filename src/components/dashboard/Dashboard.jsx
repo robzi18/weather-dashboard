@@ -28,9 +28,6 @@ const Dashboard = () => {
     // MAKE IT RESPONSIVE
     // REMOVE UNNECCERY GAPS COMING FROM GRID CSS
     // MAKE C AND F INTERACTIVE
-
-
-
   )
 }
 
