@@ -29,7 +29,7 @@
     border-radius: 0.6rem;
     display: flex;
     flex-direction: column;
-    align-items: normal;
+    align-items: center;
     gap: 1rem;
 
 }
@@ -37,15 +37,16 @@
     font-size: 14px;
     font-weight: 500;
 }
-.highlight-card .gif-wrapper{
-    width: 80px;
+.card-wrapper .highlight-card .gif-wrapper{
+    width: 100px;
     height: 80px;
+    padding: 0;
     display: flex;
     align-items: center;
-    padding: 1rem;
+    justify-content: center;
     
 }
-.highlight-card .gif-wrapper img{
+.highlight-card .gif-wrapper .animations{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -77,10 +78,13 @@
 
 
 @media screen and (max-width:600px) {
+    .highlight-container{
+        max-width: 96%;
+        margin-inline: auto;
+    }
     .card-wrapper{
         margin-top: 1rem;
         width: 100%;
-        border: 1px solid red;
         display: flex;
         flex-direction: column;
         align-items: center;

@@ -87,7 +87,11 @@
     margin-inline: auto;
 }
 .place-card{
-    width: 100%;   
+    width: 100%;  
+}
+.place-card h1{
+    font-size: 1.6rem;
+
 }
 }
 
@@ -108,6 +112,7 @@
     flex-direction: column;
     align-items: center;
     gap: 6px;
+    
 }
 .place-card .temp{
     width: 100%;
@@ -116,5 +121,9 @@
     flex-direction: column;
     align-items: center;
     gap: 6px;
+}
+.place-card .temp h1,
+.place-card .highLow p {
+    font-size: 80%;
 }
 }

@@ -1,66 +1,35 @@
 import React from 'react'
 import './favoriteCities.css'
 
-const FavoriteCities = () => {
+const FavoriteCities = ({favoriteWeather , isCel,isFar,handleCel,handleFar,forecast}) => {
+  // console.log("all the way from fav city" , favoriteWeather);
+  const favCities = favoriteWeather.map((city,index)=>{
+    return(
+        <div className="place-card" key={index}>
+          <div className="temp">
+            <h1>{`${ isCel ? city?.current?.temp_c +" °C" : city?.current?.temp_f + " °F"} `}</h1>
+            <h1>{city?.location?.name}</h1>
+          </div>
+          <div className="highLow">
+            <p>
+              {`H${ isCel ? city?.forecast?.forecastday[0]?.day?.maxtemp_c  + "°C" : city?.forecast?.forecastday[0]?.day?.maxtemp_f + "°F"} `}
+              {`L${ isCel ? city?.forecast?.forecastday[0]?.day?.mintemp_c  + "°C" : city?.forecast?.forecastday[0]?.day?.mintemp_f + "°F"} `}
+            </p>
+          </div>
+          <div className="condition-img">
+            <img src={city?.current?.condition?.icon} alt={city?.current?.condition?.text} />
+          </div>
+        </div>
+    )
+
+  }) 
   return (
     <section className='favorite-container'>
       <div className="title">
         <h1>Today favorite</h1>
       </div>
       <div className="cities-card-wrapper">
-          <div className="place-card">
-            <div className="temp">
-              <h1>26°C</h1>
-              <h1>USA</h1>
-            </div>
-            <div className="highLow">
-              <p><span>H</span>26°C <span>L</span>10°C</p>
-            </div>
-            <div className="condition-img">
-              <img src="./images/cloudy.jpg" alt="" />
-            </div>
-
-          </div>
-          <div className="place-card">
-            <div className="temp">
-              <h1>26°C</h1>
-              <h1>Paris</h1>
-            </div>
-            <div className="highLow">
-              <p><span>H</span>26°C <span>L</span>10°C</p>
-            </div>
-            <div className="condition-img">
-              <img src="./images/cloudy.jpg" alt="" />
-            </div>
-
-          </div>
-          <div className="place-card">
-            <div className="temp">
-              <h1>26°C</h1>
-              <h1>Amsterdam</h1>
-            </div>
-            <div className="highLow">
-              <p><span>H</span>26°C <span>L</span>10°C</p>
-            </div>
-            <div className="condition-img">
-              <img src="./images/cloudy.jpg" alt="" />
-            </div>
-
-          </div>
-          <div className="place-card">
-            <div className="temp">
-              <h1>26°C</h1>
-              <h1>Ethiopia</h1>
-            </div>
-            <div className="highLow">
-              <p><span>H</span>26°C <span>L</span>10°C</p>
-            </div>
-            <div className="condition-img">
-              <img src="./images/cloudy.jpg" alt="" />
-            </div>
-
-          </div>
-
+          {favCities}
       </div>
     </section>
   )
