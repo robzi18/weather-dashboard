@@ -39,6 +39,12 @@
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
+}
+.place-card:hover{
+   border: 1px solid rgba(255, 255, 255, 0.085); 
+   box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.178);
+   transition: 3ms;
 }
 .place-card .temp{
     display: flex;
@@ -111,9 +117,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    
+    gap: 6px; 
 }
+
 .place-card .temp{
     width: 100%;
     margin-inline: auto;

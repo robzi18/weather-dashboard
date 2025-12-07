@@ -1,11 +1,11 @@
 import React from 'react'
 import './favoriteCities.css'
 
-const FavoriteCities = ({favoriteWeather , isCel,isFar,handleCel,handleFar,forecast}) => {
-  // console.log("all the way from fav city" , favoriteWeather);
+const FavoriteCities = ({favoriteWeather , isCel,isFar,handleCel,handleFar,forecast,showMoreCityWeather}) => {
+  
   const favCities = favoriteWeather.map((city,index)=>{
     return(
-        <div className="place-card" key={index}>
+        <div className="place-card" key={index} onClick={showMoreCityWeather}>
           <div className="temp">
             <h1>{`${ isCel ? city?.current?.temp_c +" °C" : city?.current?.temp_f + " °F"} `}</h1>
             <h1>{city?.location?.name}</h1>

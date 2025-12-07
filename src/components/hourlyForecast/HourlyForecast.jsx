@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
+import pic from "../../assets/cloudy.png"
 import './hourlyForecast.css'
 
-const HourlyForecast = ({forecast,isCel,isFar,handleCel,handleFar}) => {
+const HourlyForecast = ({forecast,isCel,isFar,handleCel,handleFar,showMore}) => {
 
 
 // get the current time and date 
@@ -13,13 +14,13 @@ const HourlyForecast = ({forecast,isCel,isFar,handleCel,handleFar}) => {
   const allHours = forecast?.forecastday?.flatMap((day) => {
    return day?.hour
   }) || [] //nothing but to make sure it is safe
-  // console.log(allHours);
-  const nextTenHours = allHours?.filter(h => h?.time_epoch > currentEpoch).slice(0, 8); 
+  // console.log("allhours" , allHours);
+  const nextHours = allHours?.filter(h => h?.time_epoch > currentEpoch).slice(0, 8); 
   // console.log(nextTenHours);
 
-const hourlySummary = nextTenHours?.map((hourly,index)=>{
+const hourlySummary = nextHours?.map((hourly,index)=>{
             return(
-              <div key={index}>
+              <div key={index} onClick={showMore}>
               <p>{`${hourly?.time?.split(" ")[1] < "12" ? hourly?.time?.split(" ")[1] +"AM" : hourly?.time?.split(" ")[1] }`}</p>
               <img src={hourly?.condition?.icon} alt={hourly?.condition?.text} />
               <p>{`${isCel ? hourly?.temp_c + "°C" :  hourly?.temp_f + "°F"}`}</p>
@@ -35,6 +36,7 @@ const hourlySummary = nextTenHours?.map((hourly,index)=>{
       <div className="main-weather-info">
         <div className="left-side">
           <div className="hours-summary">
+            {/* everytime starts from now */}
             {hourlySummary}
           </div>
           <div className="next-day-forecast">

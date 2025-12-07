@@ -1,0 +1,94 @@
+.rightSide-container{
+    /* width: 60%;
+    margin-inline: auto; */
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    /* gap: 1rem; */
+    border: 1px solid rgba(221, 221, 242, 0.153);
+}
+.chart-container{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+.chart-container .button-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.chart-container .button-wrapper button{
+    padding: 10px 12px;
+    color: white;
+    background-color: inherit;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.168);
+    box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.256);
+}
+.chart-container .button-wrapper button:hover{
+    border: 1px solid rgba(255, 255, 255, 0.268);
+    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.185);
+   
+}
+
+/* BOTTOM INFO CONTAINER FOR THE EXTRA INFOS*/
+.bottom-info{
+    background-color: var(--light-card-bg-color);
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start; */
+    gap: 1rem;
+}
+.bottom-info .conditions-wrapper{
+    display: flex;
+    gap: 1rem;
+    /* justify-content: center; */
+    align-items: center;
+}
+.bottom-info .conditions-wrapper .card{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.303);
+    border-radius: 8px;
+    padding: 1rem;
+}
+.bottom-info .conditions-wrapper .card .card-name{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem; 
+}
+.bottom-info .conditions-wrapper .card .icon{
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    background-color: var(--focus-color);
+}
+
+
+
+
+/* MEDIA QUERIES FOR DIFFERENT KIND OF SCREEN */
+@media screen and (max-width:1100px ){
+    .rightSide-container{
+        max-width: 80%;
+        margin-inline: auto;
+    }
+
+}
+
+@media screen and (max-width: 800px) {
+
+    .rightSide-container{
+        width: 100%;
+        margin-inline: auto;
+        /* display: flex;
+        flex-direction: column;
+        align-items: center; */
+
+    }
+}

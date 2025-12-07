@@ -1,0 +1,28 @@
+.main-container{
+    padding: 1rem;
+    display: flex;
+    justify-content: normal;
+    align-items: center;
+    gap: 10px;
+    /* max-width: 100%;
+    margin-inline: auto; */
+}
+/* MEDIA QUERIES FOR DIFFERENT KIND OF SCREEN */
+@media screen and (max-width: 1000px) {
+
+    .main-container{
+        max-width: 90%;
+        margin-inline: auto;
+    }
+}
+@media screen and (max-width: 800px) {
+
+    .main-container{
+        width: 90%;
+        margin-inline: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+}

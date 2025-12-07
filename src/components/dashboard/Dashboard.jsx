@@ -8,14 +8,14 @@ import { HourlyForecast } from '../hourlyForecast/HourlyForecast.jsx'
 import { Highlights } from '../highlights/Highlights.jsx'
 
 
-const Dashboard = ({location,forecast,current,addToFavorite,isFav,favoriteWeather,isCel,isFar,handleCel,handleFar}) => {
+const Dashboard = ({location,forecast,current,addToFavorite,isFav,favoriteWeather,isCel,isFar,handleCel,handleFar,showMore,showMoreCityWeather}) => {
   // const [isExtraInfo,setIsExtraInfo] = useState(false)
   // function handleFurtherInfo(){
   //   setIsExtraInfo(!isExtraInfo)
   //   TODO
   //   TRIGGERS THE SECOND DASHBOARD
   // } 
-
+// function to normalise a date
   let localtime = location?.localtime
   if (!localtime) return null;
   // TO NORMALISE THE DATE FROM THE API
@@ -31,6 +31,7 @@ const Dashboard = ({location,forecast,current,addToFavorite,isFav,favoriteWeathe
   const month   = parts.find(p => p.type === "month").value;
   const day     = parts.find(p => p.type === "day").value;
   const year    = parts.find(p => p.type === "year").value;
+  
   const date = {
     weekday:weekday,
     month:month,
@@ -72,6 +73,7 @@ const Dashboard = ({location,forecast,current,addToFavorite,isFav,favoriteWeathe
           handleFar = {handleFar}
           isCel= {isCel}
           isFar = {isFar} 
+          showMore = {showMore}
           // handleFurtherInfo = {handleFurtherInfo}
         />
       </div>
@@ -83,6 +85,7 @@ const Dashboard = ({location,forecast,current,addToFavorite,isFav,favoriteWeathe
           handleFar = {handleFar}
           isCel= {isCel}
           isFar = {isFar}
+          showMoreCityWeather = {showMoreCityWeather}
         />
       </div>
     </section>

@@ -23,5 +23,10 @@ body{
   --light-card3-bg-color: #121D33;
   --accent-bg-color: #742BEC;
   --focus-color:#2E03E4;
-
+}
+.btn{
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  
 }

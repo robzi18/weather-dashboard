@@ -1,6 +1,11 @@
 .searchBar-container{
-    padding: 1.8rem 1.6rem;
-    max-width: 40%;
+    /* padding: 1.8rem 1.6rem; */
+    padding: 2rem;
+    max-width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
 }
 .search-place{
     background-color: inherit;
@@ -44,11 +49,42 @@
     font-size: 1.2rem;
     cursor: pointer;
 }
+.searchBar-container .backTo-main{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.415);
+    box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.451);    
+}
+.searchBar-container .backTo-main:hover{
+    border: 2px solid rgba(255, 255, 255, 0.415);
+    box-shadow: 1px 1px 2px rgba(62, 122, 218, 0.451);    
+}
+.searchBar-container .backTo-main button{
+    /* padding: 10px 12px; */
+    background-color: inherit;
+    color:white;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+}
+.searchBar-container .backTo-main .icon{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+
+}
 
 
-/*  */
+/* MEDIA QUERIES FOR DIFFERENT KIND OF SCREEN */
 @media screen and (max-width:1100px ){
 .searchBar-container{
-    max-width: 80%;   
+    max-width: 80%; 
+    display: flex;
+    flex-direction: column;
+    margin-inline: auto;
+
 }
 }

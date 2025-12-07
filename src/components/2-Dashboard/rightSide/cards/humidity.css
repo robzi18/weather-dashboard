@@ -1,0 +1,85 @@
+/* HumidityCard.css */
+
+.humidity-card {
+  background: inherit;
+  border-radius: 18px;
+  padding: 16px 18px;
+  width: 220px;
+}
+.humidity-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.humidity-percent {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--secondary-text-color);
+}
+
+.humidity-level {
+  font-size: 14px;
+  text-transform: lowercase;
+}
+
+.humidity-level--good {
+  color: #16a34a;
+}
+
+.humidity-level--normal {
+  color: #f59e0b;
+}
+
+.humidity-level--bad {
+  color: #dc2626;
+}
+
+.humidity-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+/* SCALE BAR */
+
+.humidity-scale {
+  position: relative;
+  display: flex;
+  height: 6px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #dbe3f2;
+}
+
+/* make the segments equal */
+.humidity-segment {
+  flex: 1;
+}
+
+.humidity-segment--good {
+  background: #bfecff;
+}
+
+.humidity-segment--normal {
+  background: #ffe9a3;
+}
+
+.humidity-segment--bad {
+  background: #ffc4c4;
+}
+
+/* thumb that moves left → right */
+.humidity-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%); /* center on its left % */
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
