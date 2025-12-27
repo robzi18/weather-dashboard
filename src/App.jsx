@@ -1,188 +1,266 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
-import { SearchBar } from './components/searchBar/SearchBar.jsx'
-import {Dashboard} from './components/dashboard/Dashboard.jsx'
-import { Main } from './components/2-Dashboard/Main/Main.jsx'
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { SearchBar } from "./components/searchBar/SearchBar.jsx";
+import { Dashboard } from "./components/dashboard/Dashboard.jsx";
+import { Main } from "./components/2-Dashboard/Main/Main.jsx";
+import { ErrorPage } from "./components/errorPage/ErrorPage.jsx";
+import { FaHome } from "react-icons/fa";
+import "./App.css";
 const myKey = import.meta.env.VITE_API_KEY;
-function App() { 
-  
-  const [searchPlace, setSearchPlace] = useState("")
-  const [dailyWeather,setDailyWeather] = useState({}) // CONTAINER FOR FETCHED DATA
-  const [favorite,setFavorite] = useState(["Barcelona","Miami","Bali","Oslo"])
-  const[isFav,setIsFav] = useState(false) // useful to fill the star yellow if
-  const[favoriteWeather,setFavoriteWeather] = useState([]) // WEATHER FOR FAVORITE CITIES
-  const [isCel,setIsCel] = useState(true) //SCALE CHECK IF IT IS CELSIUS 
-  const [isFar,setIsFar] = useState(false) //SCALE CHECK IF IT IS FAHRENHEIT
-  const [detailInfo,setDetailInfo] = useState(false) // USEFUL TO TRIGGER 2ND DASHBOARD
-  const [isPerc,setIsPerc] = useState(true) // USEFUL IN CHART IF PRECIP OR TEMP
-  const [isTemp,setIsTemp] = useState(false) // USEFUL IN CHART IF PRECIP OR TEMP
+function App() {
+  const [searchPlace, setSearchPlace] = useState("");
+  const [dailyWeather, setDailyWeather] = useState({}); // CONTAINER FOR FETCHED DATA
+  // const [favorite, setFavorite] = useState(["Barcelona", "Miami", "Bali"]); // FAVORITE CITIES LIST
+  const [favorite, setFavorite] = useState(
+    () =>
+      JSON.parse(localStorage.getItem("favoriteCities") || "null") || [
+        "Barcelona",
+        "Miami",
+        "Bali",
+      ]
+  );
+  // FAVORITE CITIES LIST
+  const [isFav, setIsFav] = useState(false); // useful to fill the star yellow if
+  const [favoriteWeather, setFavoriteWeather] = useState([]); // WEATHER FOR FAVORITE CITIES
+  const [isCel, setIsCel] = useState(true); //SCALE CHECK IF IT IS CELSIUS
+  const [isFar, setIsFar] = useState(false); //SCALE CHECK IF IT IS FAHRENHEIT
+  const [detailInfo, setDetailInfo] = useState(false); // USEFUL TO TRIGGER 2ND DASHBOARD
+  const [isPerc, setIsPerc] = useState(true); // USEFUL IN CHART IF PRECIP OR TEMP
+  const [isTemp, setIsTemp] = useState(false); // USEFUL IN CHART IF PRECIP OR TEMP
+  const [error, setError] = useState(null); // ERROR HANDLING
 
+  function resetFAV() {
+    setFavorite([]);
+    localStorage.removeItem("favoriteCities");
+    console.log("successfully emptied the favs" + favorite);
+  }
 
   //TO SHOW MORE WEATHER DATA FROM THE CLICKED FAVORITE CITY
-    function showMoreCityWeather(){
-      // console.log("Hello world");
-
-    }
+  function showMoreCityWeather() {
+    // console.log("Hello world");
+  }
   //HANDLE SHOW MORE OR DETAILED INFO FROM THE SECOND DASHBOARD
-  function showMore(){
-    setDetailInfo(true)
-  }  
+  function showMore() {
+    setDetailInfo(true);
+  }
   //HANDLE GO BACK TO MAIN DASHBOARD
-  function goBackToMainDashboard(){
-    setDetailInfo(false)
-  }  
+  function goBackToMainDashboard() {
+    setDetailInfo(false);
+  }
 
   // HANDLE PERCIPTATION OR TEMPRATURE GRAPH
 
-    function handlePerc(){
-        setIsPerc(true)
-        setIsTemp(false)
-      }
-      function handleTemp(){
-        setIsPerc(false)
-        setIsTemp(true)
-    }
+  function handlePerc() {
+    setIsPerc(true);
+    setIsTemp(false);
+  }
+  function handleTemp() {
+    setIsPerc(false);
+    setIsTemp(true);
+  }
   //HANDLE SEARCH PLACE FROM THE SEARCH BAR
-  function handlePlaceSearch(e){
+  function handlePlaceSearch(e) {
     e.preventDefault();
-    const formData = new FormData(e.target)
-    const place = formData.get("search")
-    setSearchPlace(place)
+    const formData = new FormData(e.target);
+    const place = formData.get("search");
+    setSearchPlace(place);
   }
 
   // HANDLE TOGGLE BETWEEN THE SCALES
-  function handleCel(){
-    setIsFar(false)
-    setIsCel(true)
+  function handleCel() {
+    setIsFar(false);
+    setIsCel(true);
   }
-  function handleFar(){
-    setIsCel(false)
-    setIsFar(true)
+  function handleFar() {
+    setIsCel(false);
+    setIsFar(true);
   }
 
   // RESPONSIBLE TO ADD THE PLACE TO A FAVORITE CITIES LIST
-    function addToFavorite(){
-      setFavorite((prev)=>[...prev,dailyWeather?.location?.name])
-      setIsFav(!isFav)
+  function addToFavorite() {
+    // TODO
+    // I WANT THIS FUNC TO CHECK IF THE CITY IS ALREADY IN FAVORITE OR NOT
+    // AND IF STAR IS FILLED OR NOT
+    // AND TO ADD OR REMOVE THE CITY FROM FAVORITE LIST
+    // AND TO SAVE THE FAVORITE LIST IN LOCAL STORAGE
+
+    const city = dailyWeather?.location?.name;
+    if (!city) return;
+    console.log("is fav is " + isFav);
+    if (!isFav) {
+      setFavorite((prev) => [...prev, city]);
+      setIsFav(true);
+      console.log("is fav is now => " + isFav);
+      // localStorage.setItem("favoriteCities", JSON.stringify(city));
+      localStorage.setItem(
+        "favoriteCities",
+        JSON.stringify([...favorite, city])
+      );
+    } else {
+      setFavorite((prev) => prev?.filter((item) => item !== city));
+    }
+  }
+  // USEEFFECT TO CHECK IF A CITY IS IN FAVORITE OR NOT
+  useEffect(() => {
+    const city = dailyWeather?.location?.name;
+    if (!city) return;
+    setIsFav(favorite.includes(city));
+    console.log("all favorite citites are " + favorite);
+  }, [dailyWeather, favorite, isFav]);
+
+  //FETCH WEATHER FUNCTION FOR ALL
+  async function fetchWeather(city) {
+    let baseUrl = `http://api.weatherapi.com/v1/forecast.json?key=${myKey}`;
+    let url = `${baseUrl}&q=${city}&days=7`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (!response.ok || data.error) {
+        return {
+          error: true,
+          type: "NOT_FOUND",
+          message: data?.error?.message || "City not found",
+        };
+      }
+
+      return { error: false, data };
+    } catch (error) {
+      return {
+        error: true,
+        type: "NETWORK",
+        message: "Network error. Please try again.",
+      };
+    }
+  }
+
+  // USEEFFECT RESPONSIBLE TO FETCH CHOOSEN/CURRENT PLACE
+
+  useEffect(() => {
+    const currentPlace = "Amsterdam";
+
+    async function fetchCurrentWeather() {
+      const city = searchPlace || currentPlace;
+      const result = await fetchWeather(city); // CALL THE FETCH FUNCTION
+      if (result.error) {
+        setError({ type: result.type, message: result.message }); //
+        return;
+      }
+
+      setError(null); //clear error
+      setDailyWeather(result.data);
     }
 
+    fetchCurrentWeather();
+  }, [searchPlace, favorite]);
 
-//FETCH WEATHER FUNCTION FOR ALL
-    async function fetchWeather(city){
-      let baseUrl = `http://api.weatherapi.com/v1/forecast.json?key=${myKey}`
-      let url
-      try{
-        if(!searchPlace){
-           url = `${baseUrl}&q=${city}&days=7`
-        }
-        else{
-          url = `${baseUrl}&q=${city}&days=7`
-        }      
-        const response = await fetch(url)
-        if (!response.ok) {
-          throw new Error("Failed to fetch weather data for the place");
-        }
-        const data = await response.json()
-        return data
-      }
-      catch(error){
-        console.log("There is an error !" + error.message)
-        return null
-      }
-    }
-
-
-// USEEFFECT RESPONSIBLE TO FETCH CHOOSEN/CURRENT PLACE
-
-  useEffect(()=>{
-    setIsFav(false)
-    let currentPlace = "Amsterdam"
-
-    //HANDLE FETCH 
-    async function fetchCurrentWeather(){
-      try{
-        const city = searchPlace || currentPlace     
-        const data = await fetchWeather(city)
-        setDailyWeather(data)
-      }
-      catch(error){
-        console.log("There is an error !" + error.message)
-      }
-    }
-    fetchCurrentWeather()
-
-  },[searchPlace])
-
-
-// USE EFFECT FOR FETCHING WEATHER FOR FAVORITE CITIES THIS CITIES WILL BE SAVED IN SERVER/LOCAL STORAGE
-  useEffect(()=>{
-
-    // INSIDE FUNCTION 
-    async function fetchFavCitiesWeather(){
-      const randomCities = [...favorite].sort(()=> Math.random() - 0.5).slice(0,4)
+  // USE EFFECT FOR FETCHING WEATHER FOR FAVORITE CITIES THIS CITIES WILL BE SAVED IN SERVER/LOCAL STORAGE
+  useEffect(() => {
+    // INSIDE FUNCTION
+    async function fetchFavCitiesWeather() {
+      const randomCities = [...favorite]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 4);
       // FETCH WEATHER FOR EACH RANDOM CITIES
       try {
-        const responses = (await Promise.all(randomCities.map(fetchWeather)))
-                    .filter(Boolean);
-      setFavoriteWeather(responses);
-      }
-      catch(error){
-        console.log(error.message);
-        return null
+        const responses = (
+          await Promise.all(randomCities.map(fetchWeather))
+        ).filter(Boolean);
+        setFavoriteWeather(responses);
+      } catch (error) {
+        // console.log(error.message);
+        return null;
       }
     }
-    
-    fetchFavCitiesWeather()
 
-  },[favorite,searchPlace])
+    fetchFavCitiesWeather();
+  }, [favorite, searchPlace]);
 
-    // ===========END OF THE FAVORITE CITIES
+  // ===========END OF THE FAVORITE CITIES
 
-
+  // console.log("now is" + error);
   return (
     <>
-        <SearchBar 
+      <div>
+        <button
+          onClick={() => {
+            resetFAV();
+          }}
+        >
+          CLEAR FAVS
+        </button>
+      </div>
+      {!error && (
+        <SearchBar
           handlePlaceSearch={handlePlaceSearch}
-          detailInfo = {detailInfo}
-          goBackToMainDashboard = {goBackToMainDashboard}
+          detailInfo={detailInfo}
+          goBackToMainDashboard={goBackToMainDashboard}
         />
-{!detailInfo &&
-        <Dashboard 
-          location = {dailyWeather.location}
-          forecast = {dailyWeather.forecast}
-          current = {dailyWeather.current}
-          addToFavorite = {addToFavorite}
-          favoriteWeather = {favoriteWeather}
-          isFav = {isFav}
-          handleCel = {handleCel}
-          handleFar = {handleFar}
-          isCel= {isCel}
-          isFar = {isFar}
-          showMore = {showMore}
-          showMoreCityWeather = {showMoreCityWeather}
+      )}
+      {!detailInfo && !error && (
+        <Dashboard
+          location={dailyWeather.location}
+          forecast={dailyWeather.forecast}
+          current={dailyWeather.current}
+          addToFavorite={addToFavorite}
+          favoriteWeather={favoriteWeather}
+          isFav={isFav}
+          handleCel={handleCel}
+          handleFar={handleFar}
+          isCel={isCel}
+          isFar={isFar}
+          showMore={showMore}
+          showMoreCityWeather={showMoreCityWeather}
           // date = {date}
-        /> }
+        />
+      )}
 
-{detailInfo &&        <Main 
-          location = {dailyWeather.location}
-          forecast = {dailyWeather?.forecast}
-          current = {dailyWeather.current}
-          addToFavorite = {addToFavorite}
-          favoriteWeather = {favoriteWeather}
-          isFav = {isFav}
-          handleCel = {handleCel}
-          handleFar = {handleFar}
-          isCel= {isCel}
-          isFar = {isFar}
-          isPerc = {isPerc}
-          isTemp = {isTemp}
-          handleTemp = {handleTemp}
-          handlePerc = {handlePerc}
+      {detailInfo && !error && (
+        <Main
+          location={dailyWeather.location}
+          forecast={dailyWeather?.forecast}
+          current={dailyWeather.current}
+          addToFavorite={addToFavorite}
+          favoriteWeather={favoriteWeather}
+          isFav={isFav}
+          handleCel={handleCel}
+          handleFar={handleFar}
+          isCel={isCel}
+          isFar={isFar}
+          isPerc={isPerc}
+          isTemp={isTemp}
+          handleTemp={handleTemp}
+          handlePerc={handlePerc}
+        />
+      )}
+      {error && (
+        <section className="error-message">
+          <ErrorPage title={error.message} />
 
-        />}
-         
+          {error.type === "NOT_FOUND" && (
+            <ErrorPage message="Check spelling or try another city." />
+          )}
+
+          {error.type === "NETWORK" && (
+            <ErrorPage message="Please check your internet connection." />
+          )}
+          <div className="backTo-main">
+            <button
+              className="go-back btn"
+              onClick={() => {
+                setError(null);
+                setDetailInfo(false);
+                setSearchPlace("");
+              }}
+            >
+              GO BACK TO MAIN
+            </button>
+            <FaHome className="icon" onClick={goBackToMainDashboard} />
+          </div>
+        </section>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

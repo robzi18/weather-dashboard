@@ -59,7 +59,7 @@
     box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.451);    
 }
 .searchBar-container .backTo-main:hover{
-    border: 2px solid rgba(255, 255, 255, 0.415);
+    border: 1px solid rgba(255, 255, 255, 0.415);
     box-shadow: 1px 1px 2px rgba(62, 122, 218, 0.451);    
 }
 .searchBar-container .backTo-main button{

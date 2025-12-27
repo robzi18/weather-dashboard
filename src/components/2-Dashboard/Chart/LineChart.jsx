@@ -23,7 +23,14 @@ ChartJS.register(
   Legend
 );
 
-function LineChart({ chartTempDataF,chartPrecipData,chartTempDataC,isCel,isTemp,isPerc }) {
+function LineChart({
+  chartTempDataF,
+  chartPrecipData,
+  chartTempDataC,
+  isCel,
+  isTemp,
+  isPerc,
+}) {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -51,7 +58,7 @@ function LineChart({ chartTempDataF,chartPrecipData,chartTempDataC,isCel,isTemp,
           text: "Time",
           color: "#abc0ebff",
           font: {
-            size: 16,//size 
+            size: 16, //size
           },
         },
         ticks: {
@@ -61,7 +68,11 @@ function LineChart({ chartTempDataF,chartPrecipData,chartTempDataC,isCel,isTemp,
       y: {
         title: {
           display: true,
-          text: isPerc ? "Rainfall (mm)" : "Temperature",
+          text: isPerc
+            ? "Rainfall (mm)"
+            : isCel
+            ? "Temperature (°C)"
+            : "Temperature (°F)",
           color: "#abc0ebff",
           font: {
             size: 18,
@@ -74,14 +85,14 @@ function LineChart({ chartTempDataF,chartPrecipData,chartTempDataC,isCel,isTemp,
     },
   };
 
-const y = isCel ? chartTempDataC : chartTempDataF;
   return (
-    <div className="chart-container" style={{ height: 500, width:420} }>
+    <div className="chart-container" style={{ height: 500, width: 420 }}>
       <Line
-        data={isPerc ? chartPrecipData : y}
+        data={
+          isPerc ? chartPrecipData : isCel ? chartTempDataC : chartTempDataF
+        }
         options={options}
       />
-    
     </div>
   );
 }

@@ -1,10 +1,8 @@
-
 import React from "react";
-import "./humidity.css"; 
+import "./humidity.css";
 
-function Humidity({current }) {
-
-const humidity = current?.humidity;
+function Humidity({ current }) {
+  const humidity = current?.humidity;
 
   let level = "good";
   if (humidity >= 30 && humidity < 60) level = "normal";
@@ -30,12 +28,9 @@ const humidity = current?.humidity;
         <div className="humidity-segment humidity-segment--normal" />
         <div className="humidity-segment humidity-segment--bad" />
 
-        <div
-          className="humidity-thumb"
-          style={{ left: `${humidity}%` }}
-        />
+        <div className="humidity-thumb" style={{ left: `${humidity}%` }} />
       </div>
     </div>
   );
 }
-export {Humidity}
+export { Humidity };

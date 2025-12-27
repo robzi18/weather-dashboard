@@ -5,7 +5,6 @@ import './hourlyForecast.css'
 
 const HourlyForecast = ({forecast,isCel,isFar,handleCel,handleFar,showMore}) => {
 
-
 // get the current time and date 
 // filter and slice of all the returned hours
 
@@ -19,11 +18,13 @@ const HourlyForecast = ({forecast,isCel,isFar,handleCel,handleFar,showMore}) => 
   // console.log(nextTenHours);
 
 const hourlySummary = nextHours?.map((hourly,index)=>{
+            const temp_C = Math.round(hourly?.temp_c)
+            const temp_F = Math.round(hourly?.temp_f)
             return(
               <div key={index} onClick={showMore}>
               <p>{`${hourly?.time?.split(" ")[1] < "12" ? hourly?.time?.split(" ")[1] +"AM" : hourly?.time?.split(" ")[1] }`}</p>
               <img src={hourly?.condition?.icon} alt={hourly?.condition?.text} />
-              <p>{`${isCel ? hourly?.temp_c + "°C" :  hourly?.temp_f + "°F"}`}</p>
+              <p>{`${isCel ? temp_C + "°C" :  temp_F + "°F"}`}</p>
             </div>
             )
 })
@@ -36,7 +37,6 @@ const hourlySummary = nextHours?.map((hourly,index)=>{
       <div className="main-weather-info">
         <div className="left-side">
           <div className="hours-summary">
-            {/* everytime starts from now */}
             {hourlySummary}
           </div>
           <div className="next-day-forecast">

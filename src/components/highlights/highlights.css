@@ -31,7 +31,13 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.089);
+}
+.highlight-card:hover{
+    border: 1px solid rgba(255, 255, 255, 0.129);
+    box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.31);
+    transition: 3ms;
 }
 .highlight-card p{
     font-size: 14px;
