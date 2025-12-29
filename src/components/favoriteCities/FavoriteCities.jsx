@@ -1,4 +1,6 @@
 import React from "react";
+import { RiResetLeftFill } from "react-icons/ri";
+import { TiDelete } from "react-icons/ti";
 import "./favoriteCities.css";
 
 const FavoriteCities = ({
@@ -9,6 +11,8 @@ const FavoriteCities = ({
   handleFar,
   forecast,
   showMoreCityWeather,
+  resetFAV,
+  addToFavorite,
 }) => {
   const favCities = favoriteWeather?.map((city, index) => {
     const temp_C = Math.round(city?.data?.current?.temp_c);
@@ -28,6 +32,9 @@ const FavoriteCities = ({
 
     return (
       <div className="place-card" key={index} onClick={showMoreCityWeather}>
+        <div>
+          <TiDelete onClick={addToFavorite} />
+        </div>
         <div className="temp">
           {/* <h1>{`${ isCel ? city?.current?.temp_c +" °C" : city?.current?.temp_f + " °F"} `}</h1> */}
           <h1>{`${isCel ? temp_C + " °C" : temp_F + " °F"} `}</h1>
@@ -52,6 +59,9 @@ const FavoriteCities = ({
     <section className="favorite-container">
       <div className="title">
         <h1>Today favorite</h1>
+        <div className="reset-icon">
+          <RiResetLeftFill onClick={resetFAV} />
+        </div>
       </div>
       <div className="cities-card-wrapper">{favCities}</div>
     </section>

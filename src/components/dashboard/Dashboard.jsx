@@ -20,6 +20,7 @@ const Dashboard = ({
   handleFar,
   showMore,
   showMoreCityWeather,
+  resetFAV,
 }) => {
   // const [isExtraInfo,setIsExtraInfo] = useState(false)
   // function handleFurtherInfo(){
@@ -92,6 +93,8 @@ const Dashboard = ({
           isCel={isCel}
           isFar={isFar}
           showMoreCityWeather={showMoreCityWeather}
+          resetFAV={resetFAV}
+          addToFavorite={addToFavorite}
         />
       </div>
     </section>

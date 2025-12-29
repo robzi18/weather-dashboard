@@ -4,6 +4,7 @@ import { SearchBar } from "./components/searchBar/SearchBar.jsx";
 import { Dashboard } from "./components/dashboard/Dashboard.jsx";
 import { Main } from "./components/2-Dashboard/Main/Main.jsx";
 import { ErrorPage } from "./components/errorPage/ErrorPage.jsx";
+import { SideSection } from "./components/sideSection/SideSection.jsx";
 import { FaHome } from "react-icons/fa";
 import "./App.css";
 const myKey = import.meta.env.VITE_API_KEY;
@@ -79,10 +80,8 @@ function App() {
   // RESPONSIBLE TO ADD THE PLACE TO A FAVORITE CITIES LIST
   function addToFavorite() {
     // TODO
-    // I WANT THIS FUNC TO CHECK IF THE CITY IS ALREADY IN FAVORITE OR NOT
-    // AND IF STAR IS FILLED OR NOT
-    // AND TO ADD OR REMOVE THE CITY FROM FAVORITE LIST
-    // AND TO SAVE THE FAVORITE LIST IN LOCAL STORAGE
+    //style of the whole dashboard
+    // making responsive
 
     const city = dailyWeather?.location?.name;
     if (!city) return;
@@ -180,86 +179,93 @@ function App() {
 
   // console.log("now is" + error);
   return (
-    <>
-      <div>
-        <button
-          onClick={() => {
-            resetFAV();
-          }}
-        >
-          CLEAR FAVS
-        </button>
-      </div>
-      {!error && (
-        <SearchBar
-          handlePlaceSearch={handlePlaceSearch}
-          detailInfo={detailInfo}
-          goBackToMainDashboard={goBackToMainDashboard}
-        />
-      )}
-      {!detailInfo && !error && (
-        <Dashboard
-          location={dailyWeather.location}
-          forecast={dailyWeather.forecast}
-          current={dailyWeather.current}
-          addToFavorite={addToFavorite}
-          favoriteWeather={favoriteWeather}
-          isFav={isFav}
-          handleCel={handleCel}
-          handleFar={handleFar}
-          isCel={isCel}
-          isFar={isFar}
-          showMore={showMore}
-          showMoreCityWeather={showMoreCityWeather}
-          // date = {date}
-        />
-      )}
-
-      {detailInfo && !error && (
-        <Main
-          location={dailyWeather.location}
-          forecast={dailyWeather?.forecast}
-          current={dailyWeather.current}
-          addToFavorite={addToFavorite}
-          favoriteWeather={favoriteWeather}
-          isFav={isFav}
-          handleCel={handleCel}
-          handleFar={handleFar}
-          isCel={isCel}
-          isFar={isFar}
-          isPerc={isPerc}
-          isTemp={isTemp}
-          handleTemp={handleTemp}
-          handlePerc={handlePerc}
-        />
-      )}
-      {error && (
-        <section className="error-message">
-          <ErrorPage title={error.message} />
-
-          {error.type === "NOT_FOUND" && (
-            <ErrorPage message="Check spelling or try another city." />
+    <section className="app-container">
+      <section className="upperSection-container">
+        {!error && (
+          <SearchBar
+            handlePlaceSearch={handlePlaceSearch}
+            detailInfo={detailInfo}
+            goBackToMainDashboard={goBackToMainDashboard}
+          />
+        )}
+      </section>
+      <section className="main-container">
+        {!error && (
+          <section className="leftSide-container">
+            <SideSection
+              className="side-section"
+              resetFAV={resetFAV}
+              showMore={showMore}
+            />
+          </section>
+        )}
+        <section className="rightSide-container">
+          {!detailInfo && !error && (
+            <Dashboard
+              location={dailyWeather.location}
+              forecast={dailyWeather.forecast}
+              current={dailyWeather.current}
+              addToFavorite={addToFavorite}
+              favoriteWeather={favoriteWeather}
+              isFav={isFav}
+              handleCel={handleCel}
+              handleFar={handleFar}
+              isCel={isCel}
+              isFar={isFar}
+              showMore={showMore}
+              showMoreCityWeather={showMoreCityWeather}
+              resetFAV={resetFAV}
+              // date = {date}
+            />
           )}
 
-          {error.type === "NETWORK" && (
-            <ErrorPage message="Please check your internet connection." />
+          {detailInfo && !error && (
+            <Main
+              location={dailyWeather.location}
+              forecast={dailyWeather?.forecast}
+              current={dailyWeather.current}
+              addToFavorite={addToFavorite}
+              favoriteWeather={favoriteWeather}
+              isFav={isFav}
+              handleCel={handleCel}
+              handleFar={handleFar}
+              isCel={isCel}
+              isFar={isFar}
+              isPerc={isPerc}
+              isTemp={isTemp}
+              handleTemp={handleTemp}
+              handlePerc={handlePerc}
+            />
           )}
-          <div className="backTo-main">
-            <button
-              className="go-back btn"
-              onClick={() => {
-                setError(null);
-                setDetailInfo(false);
-                setSearchPlace("");
-              }}
-            >
-              GO BACK TO MAIN
-            </button>
-            <FaHome className="icon" onClick={goBackToMainDashboard} />
-          </div>
+          {error && (
+            <section className="error-message">
+              <ErrorPage title={error.message} />
+
+              {error.type === "NOT_FOUND" && (
+                <ErrorPage message="Check spelling or try another city." />
+              )}
+
+              {error.type === "NETWORK" && (
+                <ErrorPage message="Please check your internet connection." />
+              )}
+              <div className="backTo-main">
+                <button
+                  className="go-back btn"
+                  onClick={() => {
+                    setError(null);
+                    setDetailInfo(false);
+                    setSearchPlace("");
+                  }}
+                >
+                  GO BACK TO MAIN
+                </button>
+                <FaHome className="icon" onClick={goBackToMainDashboard} />
+              </div>
+            </section>
+          )}
         </section>
-      )}
-    </>
+      </section>
+    </section>
   );
 }
 

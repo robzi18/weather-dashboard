@@ -1,90 +1,91 @@
-.searchBar-container{
-    /* padding: 1.8rem 1.6rem; */
-    padding: 2rem;
-    max-width: 60%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
+.searchBar-container {
+  padding: 1.8rem 1.6rem;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-inline: auto;
 }
-.search-place{
-    background-color: inherit;
-    max-width: 100%;
+.search-place {
+  background-color: inherit;
+  max-width: 100%;
+  margin-left: 6rem;
 }
-.search-place label{
-    font-weight: 550;
-    line-height: 1.2;
-    color: var(--text-color);
+.search-place label {
+  font-weight: 550;
+  line-height: 1.2;
+  color: var(--text-color);
 }
-.search-place > div > input[type="text"]{
-    padding: 10px 12px;
-    border-radius: 6px;
-    /* margin-top: 2px; */
-    background-color: inherit;
-    border: 1px solid rgba(255, 255, 255, 0.477);
-    color: var(--text-color);
-    padding-left: 2rem;
-    box-shadow: 1px 2px 3px rgba(82, 81, 81, 0.56);
-    flex: 1;
-    min-width:40% ;
+.search-place > div > input[type="text"] {
+  padding: 12px 40px;
+  border-radius: 6px;
+  /* margin-left: 2rem; */
+  background-color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.477);
+  color: var(--text-color);
+  padding-left: 2rem;
+  box-shadow: 1px 2px 3px rgba(82, 81, 81, 0.56);
+  flex: 1;
+  max-width: 100%;
 }
-.search-place > div > input[type="text"]:hover{  
-    border: 1px solid var(--secondary-text-color);   
+.search-place > div > input[type="text"]:hover {
+  border: 1px solid var(--secondary-text-color);
 }
-.search-wrapper{
-    position: relative;
-}   
-.search-field{
-    width: 100%;
-    /* I Should have minimum width */
-    min-width: 50%;   
+.search-wrapper {
+  position: relative;
 }
-
-.search-icon{
-    position: absolute;
-    top: 50%;
-    left:8px;
-    transform: translateY(-50%);
-    color: var(--text-color);
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-.searchBar-container .backTo-main{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-radius: 6px;
-    padding: 10px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.415);
-    box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.451);    
-}
-.searchBar-container .backTo-main:hover{
-    border: 1px solid rgba(255, 255, 255, 0.415);
-    box-shadow: 1px 1px 2px rgba(62, 122, 218, 0.451);    
-}
-.searchBar-container .backTo-main button{
-    /* padding: 10px 12px; */
-    background-color: inherit;
-    color:white;
-    font-weight: 600;
-    text-align: center;
-    border: none;
-}
-.searchBar-container .backTo-main .icon{
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-
+.search-field {
+  width: 100%;
+  /* I Should have minimum width */
+  min-width: 50%;
 }
 
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+  color: var(--text-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.searchBar-container .backTo-main {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+  border-radius: 6px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.415);
+  box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.451);
+}
+.searchBar-container .backTo-main:hover {
+  border: 1px solid rgba(255, 255, 255, 0.415);
+  box-shadow: 1px 1px 2px rgba(62, 122, 218, 0.451);
+  background-color: var(--focus-color);
+  transition: all 0.5s ease;
+}
+.searchBar-container .backTo-main button {
+  background-color: inherit;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+}
+.searchBar-container .backTo-main .icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
 
 /* MEDIA QUERIES FOR DIFFERENT KIND OF SCREEN */
-@media screen and (max-width:1100px ){
-.searchBar-container{
-    max-width: 80%; 
+@media screen and (max-width: 1100px) {
+  .searchBar-container {
+    max-width: 80%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-inline: auto;
-
-}
+  }
 }

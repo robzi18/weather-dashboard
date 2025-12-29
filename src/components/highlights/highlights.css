@@ -1,105 +1,98 @@
-.highlight-container{
-    background-color: var(--light-card3-bg-color);
-    padding: 10px 10px;
-    margin-top: 16px;
-    border-radius: 1.4rem;
-    border: 1px solid rgba(255, 255, 255, 0.089);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: normal;
-    margin-inline: auto;
+.highlight-container {
+  background-color: var(--light-card3-bg-color);
+  padding: 10px 10px;
+  margin-top: 16px;
+  border-radius: var(--outer-card-br);
+  border: 1px solid rgba(255, 255, 255, 0.089);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: normal;
+  margin-inline: auto;
 }
-.highlight-container .title h1{
-    margin-top: 10px;
-    font-size: 1rem;
-    font-weight: 500;
+.highlight-container .title h1 {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 500;
 }
-.card-wrapper{
-    margin-top: 14px;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: auto;     /* important */
-    align-items: flex-start;   
-    gap: 1rem;
+.card-wrapper {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: auto; /* important */
+  align-items: flex-start;
+  gap: 1rem;
 }
-.highlight-card{
-    background-color: var(--primary-bg-color);
-    padding: 0.8rem 1rem ;
-    border-radius: 0.6rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.089);
+.highlight-card {
+  background-color: var(--primary-bg-color);
+  padding: 0.8rem 1rem;
+  border-radius: var(--inner-card-br);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.089);
 }
-.highlight-card:hover{
-    border: 1px solid rgba(255, 255, 255, 0.129);
-    box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.31);
-    transition: 3ms;
+.highlight-card:hover {
+  border: 1px solid rgba(255, 255, 255, 0.129);
+  box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.31);
+  transition: 3ms;
 }
-.highlight-card p{
-    font-size: 14px;
-    font-weight: 500;
+.highlight-card p {
+  font-size: 14px;
+  font-weight: 500;
 }
-.card-wrapper .highlight-card .gif-wrapper{
-    width: 100px;
-    height: 80px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
+.card-wrapper .highlight-card .gif-wrapper {
+  width: 100px;
+  height: 80px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.highlight-card .gif-wrapper .animations{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    color: white;
+.highlight-card .gif-wrapper .animations {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  color: white;
 }
-
-
 
 /* MEDIA QUERIES FOR DIFFERENT KIND OF SCREEN */
-@media screen and (max-width:1100px) {
-    .highlight-container{
-        max-width: 100%;
-    }
+@media screen and (max-width: 1100px) {
+  .highlight-container {
+    max-width: 100%;
+  }
 
-    .card-wrapper{
-        margin-top: 1rem;
-        width: 100%;
-    }
+  .card-wrapper {
+    margin-top: 1rem;
+    width: 100%;
+  }
 
-    .highlight-card{
-        width: 100%;
-    } 
-    
+  .highlight-card {
+    width: 100%;
+  }
 }
 
+@media screen and (max-width: 600px) {
+  .highlight-container {
+    max-width: 96%;
+    margin-inline: auto;
+  }
+  .card-wrapper {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-inline: auto;
+  }
 
-@media screen and (max-width:600px) {
-    .highlight-container{
-        max-width: 96%;
-        margin-inline: auto;
-    }
-    .card-wrapper{
-        margin-top: 1rem;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-inline: auto;
-
-    }
-
-    .highlight-card{
-        width: 90%;
-        margin-inline: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }  
-    
+  .highlight-card {
+    width: 90%;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
