@@ -89,3 +89,17 @@
     margin-inline: auto;
   }
 }
+
+@media screen and (max-width: 800px) {
+  .search-place > div > input[type="text"] {
+    width: 100%;
+    min-width: 100%;
+  }
+  .searchBar-container .backTo-main {
+    width: 25%;
+    justify-content: center;
+  }
+  .searchBar-container .backTo-main button {
+    display: none;
+  }
+}

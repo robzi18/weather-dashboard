@@ -49,14 +49,14 @@ const HourlyForecast = ({
           <div className="next-day-forecast">
             <div className="next-day-wrapper">
               <div>
-                <h2>Tomorrow</h2>
+                <h3>Tomorrow</h3>
                 <p>{forecast?.forecastday[1]?.day?.condition?.text}</p>
               </div>
-              <h1>{`${
+              <h2>{`${
                 isCel
                   ? forecast?.forecastday[1]?.day?.avgtemp_c + " °C"
                   : forecast?.forecastday[1]?.day?.avgtemp_f + " °F"
-              }`}</h1>
+              }`}</h2>
               <img
                 src={forecast?.forecastday[1]?.day?.condition?.icon}
                 alt={forecast?.forecastday[1]?.day?.condition?.text}

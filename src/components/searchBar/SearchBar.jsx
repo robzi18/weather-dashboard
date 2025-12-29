@@ -12,7 +12,6 @@ const SearchBar = ({
     <section className="searchBar-container">
       <form onSubmit={handlePlaceSearch} className="search-place">
         <div className="search-wrapper">
-          {/* <arial-label htmlFor="Search">Search</arial-label> */}
           <input
             type="text"
             name="search"
@@ -21,12 +20,11 @@ const SearchBar = ({
           />
           <IoSearchSharp className="search-icon" type="submit" />
         </div>
-        {/* <button type='submit'>Search</button> */}
       </form>
       {detailInfo && (
         <div className="backTo-main">
           <button className="go-back btn" onClick={goBackToMainDashboard}>
-            GO BACK TO MAIN
+            Home
           </button>
           <FaHome className="icon" onClick={goBackToMainDashboard} />
         </div>

@@ -27,7 +27,6 @@ body {
   --focus-color: #2e03e4;
   --outer-card-br: 1.3rem;
   --inner-card-br: 0.8rem;
-  /* --2nd-inner-card-br: 0.8rem; */
   --button-br: 6px;
   --inner-card-border-hover-color: 1px solid rgba(255, 255, 255, 0.129);
   --inner-card-box-shadow-hover-color: 1px 1px 1px rgba(255, 255, 255, 0.31);

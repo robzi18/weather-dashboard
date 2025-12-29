@@ -160,4 +160,11 @@
     max-width: 90%;
     margin-inline: auto;
   }
+  .main-weather-info .left-side .next-day-forecast .next-day-wrapper {
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 }

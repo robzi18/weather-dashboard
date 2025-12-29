@@ -14,6 +14,7 @@ const Dashboard = ({
   addToFavorite,
   isFav,
   favoriteWeather,
+  alert,
   isCel,
   isFar,
   handleCel,
@@ -22,12 +23,6 @@ const Dashboard = ({
   showMoreCityWeather,
   resetFAV,
 }) => {
-  // const [isExtraInfo,setIsExtraInfo] = useState(false)
-  // function handleFurtherInfo(){
-  //   setIsExtraInfo(!isExtraInfo)
-  //   TODO
-  //   TRIGGERS THE SECOND DASHBOARD
-  // }
   // function to normalise a date
   let localtime = location?.localtime;
   if (!localtime) return null;
@@ -60,6 +55,7 @@ const Dashboard = ({
           current={current}
           date={date}
           addToFavorite={addToFavorite}
+          alert={alert}
           isFav={isFav}
           handleCel={handleCel}
           handleFar={handleFar}
@@ -81,7 +77,6 @@ const Dashboard = ({
           isCel={isCel}
           isFar={isFar}
           showMore={showMore}
-          // handleFurtherInfo = {handleFurtherInfo}
         />
       </div>
 

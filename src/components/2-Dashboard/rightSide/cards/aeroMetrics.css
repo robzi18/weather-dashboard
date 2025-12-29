@@ -1,42 +1,42 @@
-/* HumidityCard.css */
+/* aeroMetricCard.css */
 
-.humidity-card {
+.aeroMetric-card {
   background: inherit;
   border-radius: 18px;
   padding: 16px 18px;
   width: 220px;
 }
-.humidity-value-row {
+.aeroMetric-value-row {
   display: flex;
   align-items: baseline;
   gap: 6px;
   margin-bottom: 8px;
 }
 
-.humidity-percent {
+.aeroMetric-percent {
   font-size: 26px;
   font-weight: 700;
   color: var(--secondary-text-color);
 }
 
-.humidity-level {
+.aeroMetric-level {
   font-size: 14px;
   text-transform: lowercase;
 }
 
-.humidity-level--good {
+.aeroMetric-level--good {
   color: #16a34a;
 }
 
-.humidity-level--normal {
+.aeroMetric-level--normal {
   color: #f59e0b;
 }
 
-.humidity-level--bad {
+.aeroMetric-level--bad {
   color: #dc2626;
 }
 
-.humidity-labels {
+.aeroMetric-labels {
   display: flex;
   justify-content: space-between;
   font-size: 11px;
@@ -46,7 +46,7 @@
 
 /* SCALE BAR */
 
-.humidity-scale {
+.aeroMetric-scale {
   position: relative;
   display: flex;
   height: 6px;
@@ -56,24 +56,24 @@
 }
 
 /* make the segments equal */
-.humidity-segment {
+.aeroMetric-segment {
   flex: 1;
 }
 
-.humidity-segment--good {
+.aeroMetric-segment--good {
   background: #bfecff;
 }
 
-.humidity-segment--normal {
+.aeroMetric-segment--normal {
   background: #ffe9a3;
 }
 
-.humidity-segment--bad {
+.aeroMetric-segment--bad {
   background: #ffc4c4;
 }
 
 /* thumb that moves left → right */
-.humidity-thumb {
+.aeroMetric-thumb {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%); /* center on its left % */

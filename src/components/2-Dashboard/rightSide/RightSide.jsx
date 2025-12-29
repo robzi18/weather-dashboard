@@ -4,6 +4,8 @@ import { RiCloudWindyLine } from "react-icons/ri";
 import { DatasetNormalizer } from "../Chart/DatasetNormalizer";
 import { TbUvIndex } from "react-icons/tb";
 import { Humidity } from "./cards/Humidity";
+import { UvIndex } from "./cards/UvIndex";
+import { Wind } from "./cards/Wind";
 import "./rightSide.css";
 
 const RightSide = ({
@@ -54,14 +56,18 @@ const RightSide = ({
               <p>Windy</p>
               <RiCloudWindyLine className="icon" />
             </div>
-            <div></div>
+            <div>
+              <Wind current={current} />
+            </div>
           </div>
           <div className="UV-container card">
             <div className="card-name">
               <p>Uv</p>
               <TbUvIndex className="icon" />
             </div>
-            <div></div>
+            <div>
+              <UvIndex current={current} />
+            </div>
           </div>
         </div>
       </div>

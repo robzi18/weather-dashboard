@@ -4,7 +4,6 @@ import { SearchBar } from "./components/searchBar/SearchBar.jsx";
 import { Dashboard } from "./components/dashboard/Dashboard.jsx";
 import { Main } from "./components/2-Dashboard/Main/Main.jsx";
 import { ErrorPage } from "./components/errorPage/ErrorPage.jsx";
-import { SideSection } from "./components/sideSection/SideSection.jsx";
 import { FaHome } from "react-icons/fa";
 import "./App.css";
 const myKey = import.meta.env.VITE_API_KEY;
@@ -29,7 +28,7 @@ function App() {
   const [isPerc, setIsPerc] = useState(true); // USEFUL IN CHART IF PRECIP OR TEMP
   const [isTemp, setIsTemp] = useState(false); // USEFUL IN CHART IF PRECIP OR TEMP
   const [error, setError] = useState(null); // ERROR HANDLING
-
+  const [alert, setAlert] = useState(false);
   function resetFAV() {
     setFavorite([]);
     localStorage.removeItem("favoriteCities");
@@ -77,7 +76,7 @@ function App() {
     setIsFar(true);
   }
 
-  // RESPONSIBLE TO ADD THE PLACE TO A FAVORITE CITIES LIST
+  // RESPONSIBLE TO ADD/REMOVE THE PLACE TO A FAVORITE CITIES LIST
   function addToFavorite() {
     // TODO
     //style of the whole dashboard
@@ -85,31 +84,31 @@ function App() {
 
     const city = dailyWeather?.location?.name;
     if (!city) return;
-    console.log("is fav is " + isFav);
+    // console.log("is fav is " + isFav);
     if (!isFav) {
       setFavorite((prev) => [...prev, city]);
       setIsFav(true);
-      console.log("is fav is now => " + isFav);
-      // localStorage.setItem("favoriteCities", JSON.stringify(city));
+      // console.log("is fav is now => " + isFav);
       localStorage.setItem(
         "favoriteCities",
         JSON.stringify([...favorite, city])
       );
     } else {
+      //IF THE FAV IS TRUE THAT MEANS CITY IS ON THE FAVORITE LIST SO USER WANTS TO DELETE IT!!
       setFavorite((prev) => prev?.filter((item) => item !== city));
     }
   }
-  // USEEFFECT TO CHECK IF A CITY IS IN FAVORITE OR NOT
+
+  // USEEFFECT TO CHECK IF A CITY IS IN FAVORITE OR NOT THEN ON THE YELLOW STAR
   useEffect(() => {
     const city = dailyWeather?.location?.name;
     if (!city) return;
-    setIsFav(favorite.includes(city));
-    console.log("all favorite citites are " + favorite);
+    setIsFav(favorite.includes(city)); // CHECK IF IT IS ON THE FAVORITE LIST
   }, [dailyWeather, favorite, isFav]);
 
   //FETCH WEATHER FUNCTION FOR ALL
   async function fetchWeather(city) {
-    let baseUrl = `http://api.weatherapi.com/v1/forecast.json?key=${myKey}`;
+    let baseUrl = `http://api.weatherapi.com/v1/forecast.json?key=${myKey}&alerts=yes`;
     let url = `${baseUrl}&q=${city}&days=7`;
     try {
       const response = await fetch(url);
@@ -133,7 +132,7 @@ function App() {
     }
   }
 
-  // USEEFFECT RESPONSIBLE TO FETCH CHOOSEN/CURRENT PLACE
+  // USEEFFECT RESPONSIBLE TO FETCH SEARCHED/CURRENT PLACE
 
   useEffect(() => {
     const currentPlace = "Amsterdam";
@@ -177,95 +176,80 @@ function App() {
 
   // ===========END OF THE FAVORITE CITIES
 
-  // console.log("now is" + error);
   return (
-    <section className="app-container">
-      <section className="upperSection-container">
-        {!error && (
-          <SearchBar
-            handlePlaceSearch={handlePlaceSearch}
-            detailInfo={detailInfo}
-            goBackToMainDashboard={goBackToMainDashboard}
-          />
-        )}
-      </section>
-      <section className="main-container">
-        {!error && (
-          <section className="leftSide-container">
-            <SideSection
-              className="side-section"
-              resetFAV={resetFAV}
-              showMore={showMore}
-            />
-          </section>
-        )}
-        <section className="rightSide-container">
-          {!detailInfo && !error && (
-            <Dashboard
-              location={dailyWeather.location}
-              forecast={dailyWeather.forecast}
-              current={dailyWeather.current}
-              addToFavorite={addToFavorite}
-              favoriteWeather={favoriteWeather}
-              isFav={isFav}
-              handleCel={handleCel}
-              handleFar={handleFar}
-              isCel={isCel}
-              isFar={isFar}
-              showMore={showMore}
-              showMoreCityWeather={showMoreCityWeather}
-              resetFAV={resetFAV}
-              // date = {date}
-            />
+    <>
+      {!error && (
+        <SearchBar
+          handlePlaceSearch={handlePlaceSearch}
+          detailInfo={detailInfo}
+          goBackToMainDashboard={goBackToMainDashboard}
+        />
+      )}
+
+      {!detailInfo && !error && (
+        <Dashboard
+          location={dailyWeather.location}
+          forecast={dailyWeather.forecast}
+          current={dailyWeather.current}
+          addToFavorite={addToFavorite}
+          favoriteWeather={favoriteWeather}
+          alert={alert}
+          isFav={isFav}
+          handleCel={handleCel}
+          handleFar={handleFar}
+          isCel={isCel}
+          isFar={isFar}
+          showMore={showMore}
+          showMoreCityWeather={showMoreCityWeather}
+          resetFAV={resetFAV}
+        />
+      )}
+
+      {detailInfo && !error && (
+        <Main
+          location={dailyWeather.location}
+          forecast={dailyWeather?.forecast}
+          current={dailyWeather.current}
+          addToFavorite={addToFavorite}
+          favoriteWeather={favoriteWeather}
+          isFav={isFav}
+          handleCel={handleCel}
+          handleFar={handleFar}
+          isCel={isCel}
+          isFar={isFar}
+          isPerc={isPerc}
+          isTemp={isTemp}
+          handleTemp={handleTemp}
+          handlePerc={handlePerc}
+        />
+      )}
+      {error && (
+        <section className="error-message">
+          <ErrorPage title={error.message} />
+
+          {error.type === "NOT_FOUND" && (
+            <ErrorPage message="Check spelling or try another city." />
           )}
 
-          {detailInfo && !error && (
-            <Main
-              location={dailyWeather.location}
-              forecast={dailyWeather?.forecast}
-              current={dailyWeather.current}
-              addToFavorite={addToFavorite}
-              favoriteWeather={favoriteWeather}
-              isFav={isFav}
-              handleCel={handleCel}
-              handleFar={handleFar}
-              isCel={isCel}
-              isFar={isFar}
-              isPerc={isPerc}
-              isTemp={isTemp}
-              handleTemp={handleTemp}
-              handlePerc={handlePerc}
-            />
+          {error.type === "NETWORK" && (
+            <ErrorPage message="Please check your internet connection." />
           )}
-          {error && (
-            <section className="error-message">
-              <ErrorPage title={error.message} />
-
-              {error.type === "NOT_FOUND" && (
-                <ErrorPage message="Check spelling or try another city." />
-              )}
-
-              {error.type === "NETWORK" && (
-                <ErrorPage message="Please check your internet connection." />
-              )}
-              <div className="backTo-main">
-                <button
-                  className="go-back btn"
-                  onClick={() => {
-                    setError(null);
-                    setDetailInfo(false);
-                    setSearchPlace("");
-                  }}
-                >
-                  GO BACK TO MAIN
-                </button>
-                <FaHome className="icon" onClick={goBackToMainDashboard} />
-              </div>
-            </section>
-          )}
+          <div className="backTo-main">
+            <button
+              className="go-back btn"
+              onClick={() => {
+                setError(null);
+                setDetailInfo(false);
+                setSearchPlace("");
+              }}
+            >
+              GO BACK TO MAIN
+            </button>
+            <FaHome className="icon" onClick={goBackToMainDashboard} />
+          </div>
         </section>
-      </section>
-    </section>
+      )}
+    </>
   );
 }
 

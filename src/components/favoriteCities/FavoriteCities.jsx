@@ -63,6 +63,7 @@ const FavoriteCities = ({
           <RiResetLeftFill onClick={resetFAV} />
         </div>
       </div>
+
       <div className="cities-card-wrapper">{favCities}</div>
     </section>
   );

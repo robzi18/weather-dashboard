@@ -9,6 +9,7 @@ const CurrentPanel = ({
   current,
   forecast,
   addToFavorite,
+  alert,
   isFav,
   isCel,
   isFar,
@@ -88,9 +89,11 @@ const CurrentPanel = ({
           </div>
         </div>
       </div>
-      <div className="alert-wrapper">
-        <p></p>
-      </div>
+      {alert && (
+        <div className="alert-wrapper">
+          <p></p>
+        </div>
+      )}
     </section>
   );
 };

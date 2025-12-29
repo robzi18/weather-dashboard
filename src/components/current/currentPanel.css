@@ -65,6 +65,10 @@
   display: flex;
   align-items: start;
   text-align: normal;
+  border: 1px solid rgb(245, 24, 24);
+  padding: 8px 12px;
+  border-radius: 0.8rem;
+  background-color: var(--focus-color);
 }
 .alert-wrapper p {
   width: 100%;
@@ -90,7 +94,7 @@
 }
 .left-side .date-wrapper h1 {
   font-weight: 500;
-  font-size: 2.2em;
+  font-size: 2em;
 }
 .left-side > div p {
   font-size: 0.8rem;
@@ -173,7 +177,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    padding: 10px 6px;
+    padding: 10px 12px;
     border: 1px solid rgba(255, 255, 255, 0.077);
     border-radius: 1rem;
   }
@@ -183,5 +187,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .left-side .date-wrapper h1 {
+    font-size: 1.8em;
+  }
+  .top-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 }

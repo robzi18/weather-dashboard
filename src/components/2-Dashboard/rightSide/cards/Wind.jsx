@@ -1,17 +1,17 @@
 import React from "react";
 import "./aeroMetrics.css";
 
-function Humidity({ current }) {
-  const humidity = current?.humidity;
+function Wind({ current }) {
+  const wind = current?.wind_kph;
 
   let level = "good";
-  if (humidity >= 30 && humidity < 60) level = "normal";
-  if (humidity >= 60) level = "bad";
+  if (wind >= 20 && wind < 38) level = "normal";
+  if (wind >= 39) level = "bad";
 
   return (
     <div className="aeroMetric-card">
       <div className="aeroMetric-value-row">
-        <span className="aeroMetric-percent">{humidity}%</span>
+        <span className="aeroMetric-percent">{wind}kph</span>
         <span className={`aeroMetric-level aeroMetric-level--${level}`}>
           {level}
         </span>
@@ -28,9 +28,9 @@ function Humidity({ current }) {
         <div className="aeroMetric-segment aeroMetric-segment--normal" />
         <div className="aeroMetric-segment aeroMetric-segment--bad" />
 
-        <div className="aeroMetric-thumb" style={{ left: `${humidity}%` }} />
+        <div className="aeroMetric-thumb" style={{ left: `${wind}%` }} />
       </div>
     </div>
   );
 }
-export { Humidity };
+export { Wind };
